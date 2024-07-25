@@ -3,7 +3,7 @@ import ProfileAvatar from './ProfileAvatar';
 
 // Example functional component
 const MyComponent = () => {
-    const localImage = require('./Sociography/src/assets/profilepic1.jpg').default;
+    const localImage = require('../../assets/profilepic1.jpg').default;
   return (
     <div>
       <ProfileAvatar imageUrl={localImage} altText={"altText"} />
