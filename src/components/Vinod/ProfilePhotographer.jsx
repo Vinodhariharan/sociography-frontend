@@ -1,6 +1,7 @@
 import React from 'react';
 import ProfileAvatar from './ProfileAvatar';
 import { Grid, Typography, Button, Divider } from '@mui/material';
+import MediaCard from './TestCard';
 
 // Example functional component
 const MyComponent = () => {
@@ -51,6 +52,8 @@ const MyComponent = () => {
           </Grid>
         ))}
       </Grid>
+
+      <MediaCard></MediaCard>
     </div>
   );
 }
