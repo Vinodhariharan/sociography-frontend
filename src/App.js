@@ -1,10 +1,18 @@
+import logo from './logo.svg';
 import './App.css';
-import Partnerlist from './components/Naveen/ParnerList/PartnerList';
+import MyComponent from './components/Vinod/ProfilePhotographer';
+import Navbar from './components/common/NavBar';
+import { Route, Routes, } from 'react-router-dom';
+import { Container } from '@mui/material';
+
 
 function App() {
   return (
-    <div className="App">
-      <Partnerlist />
+    <div>
+    <Navbar></Navbar>
+    <Container>
+      <MyComponent/>
+    </Container>
     </div>
   );
 }
