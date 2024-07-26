@@ -143,7 +143,6 @@ const ProfilePhotographer = () => {
           </Button>
         </DialogActions>
       </Dialog>
-      <MediaCard />
     </div>
   );
 };

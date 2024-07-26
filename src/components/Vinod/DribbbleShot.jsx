@@ -12,12 +12,27 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 
-const DribbbleShot = ({ image, title, location, comments = [] }) => {
+const DribbbleShot = ({ image, title, location, initialComments = [] }) => {
   const [open, setOpen] = React.useState(false);
+  const [comments, setComments] = React.useState(initialComments);
+  const [newComment, setNewComment] = React.useState('');
 
   const handleClickOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const handleCommentChange = (e) => {
+    setNewComment(e.target.value);
+  };
+
+  const handleAddComment = () => {
+    if (newComment.trim() !== '') {
+      setComments([...comments, { user: 'Current User', text: newComment }]);
+      setNewComment('');
+    }
+  };
 
   return (
     <>
@@ -92,15 +107,15 @@ const DribbbleShot = ({ image, title, location, comments = [] }) => {
       <Dialog
         open={open}
         onClose={handleClose}
-        maxWidth="md" // Adjust maxWidth as needed
+        maxWidth="md"
         fullWidth
         sx={{
           '& .MuiDialog-paper': {
-            width: 'calc(100vw - 100px)', // Adjust width to be almost full screen, less from sides
-            height: 'calc(100vh - 100px)', // Adjust height similarly
+            width: 'calc(100vw - 100px)',
+            height: 'calc(100vh - 100px)',
             maxWidth: '100vw',
             maxHeight: '100vh',
-            borderRadius: '16px', // Optional: rounded corners
+            borderRadius: '16px',
           },
         }}
       >
@@ -187,6 +202,24 @@ const DribbbleShot = ({ image, title, location, comments = [] }) => {
                   </React.Fragment>
                 ))}
               </List>
+              <Box sx={{ display: 'flex', marginTop: 2 }}>
+                <TextField
+                  fullWidth
+                  label="Add a comment"
+                  value={newComment}
+                  onChange={handleCommentChange}
+                  variant="outlined"
+                  size="small"
+                  sx={{ marginRight: 1 }}
+                />
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={handleAddComment}
+                >
+                  Post
+                </Button>
+              </Box>
             </Box>
           </Box>
           <IconButton
