@@ -25,7 +25,7 @@ function App() {
             <Route path="/search" element={<SearchPage />} />
             <Route path="/search-results" element={<SearchResultsPage />} />
             <Route path="/profile-photographer" element={<ProfilePhotographer />} /> - profile-photographer
-            <Route path="/" element={<PartnerProfile />} /> - partner-profile
+            <Route path="/partner-profile" element={<PartnerProfile />} /> - partner-profile
             <Route path="/partner-listing" element={<PartnerList />} />
           </Routes>
         </Container>
