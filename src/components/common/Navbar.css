@@ -1,0 +1,14 @@
+.search-container {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .search-bar {
+    width: 50%;
+    padding: 8px;
+    border: 2px solid rgb(80, 140, 155);
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  

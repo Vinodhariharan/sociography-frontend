@@ -1,0 +1,31 @@
+.search-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(238, 238, 238);
+    padding: 20px;
+    min-height: calc(100vh - 64px); /* Adjust based on the height of the Navbar */
+  }
+  
+  .search-bar {
+    width: 80%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 2px solid rgb(80, 140, 155);
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .search-results {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .partner-card {
+    max-width: 600px;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
