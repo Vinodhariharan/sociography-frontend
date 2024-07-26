@@ -9,11 +9,8 @@ import { Route, Routes } from 'react-router-dom';
 // import PartnerSignUp from './components/pages/PartnerSignUp';
 // import PhotographerSignUp from './components/pages/PhotographerSignUp';
 import ProfilePhotographer from './components/Vinod/ProfilePhotographer.jsx';
-// import PartnerProfile from './components/pages/PartnerProfile';
-// import SearchResults from './components/pages/SearchResults';
-// import PartnerListing from './components/pages/PartnerListing';
-// import PhotoUploadPage from './components/pages/PhotoUploadPage';
-// import CommentsPage from './components/pages/CommentsPage';
+import PartnerProfile from './components/Vinod/PartnerProfile.jsx';
+
 
 function App() {
   return (
@@ -27,14 +24,9 @@ function App() {
             {/* <Route path="/photographer-signup" element={<PhotographerSignUp />} /> */}
             <Route path="/search" element={<SearchPage />} />
             <Route path="/search-results" element={<SearchResultsPage />} />
-            {/* <Route path="/partner-profile" element={<PartnerProfile />} /> */}
-            {/* <Route path="/partner-listing" element={<PartnerList />} /> */}
-            <Route path="/" element={<ProfilePhotographer />} /> - profile-photographer
-            {/* <Route path="/partner-profile" element={<PartnerProfile />} /> */}
-            {/* <Route path="/search-results" element={<SearchResults />} /> */}
+            <Route path="/profile-photographer" element={<ProfilePhotographer />} /> - profile-photographer
+            <Route path="/" element={<PartnerProfile />} /> - partner-profile
             <Route path="/partner-listing" element={<PartnerList />} />
-            {/* <Route path="/photo-upload" element={<PhotoUploadPage />} /> */}
-            {/* <Route path="/comments" element={<CommentsPage />} /> */}
           </Routes>
         </Container>
       </div>

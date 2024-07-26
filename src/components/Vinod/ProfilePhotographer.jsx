@@ -31,6 +31,7 @@ const About = () => {
 
   const [open, setOpen] = useState(false);
   const [formData, setFormData] = useState(profileData);
+  const [contactRequestSent, setContactRequestSent] = useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -38,6 +39,11 @@ const About = () => {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleContactRequest = () => {
+    setContactRequestSent(true);
+    console.log('Contact request sent');
   };
 
   const handleChange = (e) => {
@@ -80,8 +86,14 @@ const About = () => {
               </Button>
             </Grid>
             <Grid item>
-              <Button variant="contained" color="secondary" sx={{ fontFamily: 'League Spartan, sans-serif' }}>
-                Contact Request
+            <Button
+                variant="contained"
+                color="secondary"
+                sx={{ fontFamily: 'League Spartan, sans-serif' }}
+                onClick={handleContactRequest}
+                disabled={contactRequestSent}
+              >
+                {contactRequestSent ? 'Request Sent' : 'Contact Request'}
               </Button>
             </Grid>
             <Grid item>
