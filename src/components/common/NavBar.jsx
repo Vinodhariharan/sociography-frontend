@@ -3,14 +3,11 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-<<<<<<< Updated upstream
 import { Container } from '@mui/material';
-=======
 import TextField from '@mui/material/TextField';
 import { Container, Box } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import NotificationDropdown from './NotificationDropdown'; // Import the new component
->>>>>>> Stashed changes
 
 const Navbar = () => {
   const [query, setQuery] = useState('');
@@ -27,11 +24,10 @@ const Navbar = () => {
   };
 
   return (
-    <AppBar position="" sx={{ backgroundColor: '#f1efe7' }}>
+    <AppBar position="static" sx={{ backgroundColor: '#f1efe7' }}>
       <Container>
-<<<<<<< Updated upstream
         <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1, color: 'black', fontFamily: 'League Spartan, sans-serif', fontWeight:600}}>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1, color: 'black', fontFamily: 'League Spartan, sans-serif', fontWeight: 600 }}>
             SocioGraphy.
           </Typography>
           <Button color="primary" sx={{ fontFamily: 'League Spartan, sans-serif' }}>
@@ -40,7 +36,6 @@ const Navbar = () => {
           <Button color="primary" sx={{ fontFamily: 'League Spartan, sans-serif' }}>
             About
           </Button>
-=======
         <Toolbar sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <Typography variant="h6" component="div" sx={{ color: 'black', fontFamily: 'League Spartan, sans-serif', fontWeight: 600 }}>
             SocioGraphy.
@@ -77,7 +72,6 @@ const Navbar = () => {
             </Button>
             <NotificationDropdown /> {/* Add notification dropdown */}
           </Box>
->>>>>>> Stashed changes
         </Toolbar>
       </Container>
     </AppBar>
