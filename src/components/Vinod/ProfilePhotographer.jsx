@@ -4,6 +4,7 @@ import {
 } from '@mui/material';
 import ProfileAvatar from './ProfileAvatar';
 import DribbbleShot from './DribbbleShot';
+import MediaCard from './TestCard';
 
 const ProfilePhotographer = () => {
   const profileData = {
@@ -16,15 +17,15 @@ const ProfilePhotographer = () => {
   };
 
   const images = [
-    { id: 1, src: '/image1.jpg', title: 'Image 1', location: 'Location 1' },
-    { id: 2, src: '/image2.jpg', title: 'Image 2', location: 'Location 2' },
-    { id: 3, src: '/image3.jpg', title: 'Image 3', location: 'Location 3' },
-    { id: 4, src: '/image4.jpg', title: 'Image 4', location: 'Location 4' },
-    { id: 5, src: '/image5.jpg', title: 'Image 5', location: 'Location 5' },
-    { id: 6, src: '/image6.jpg', title: 'Image 6', location: 'Location 6' },
-    { id: 7, src: '/image7.jpg', title: 'Image 7', location: 'Location 7' },
-    { id: 8, src: '/image8.jpg', title: 'Image 8', location: 'Location 8' },
-    { id: 9, src: '/image9.jpg', title: 'Image 9', location: 'Location 9' }
+    { id: 1, src: '/image1.jpg', title: 'Image 1', location: 'Location 1', comments: [{ user: 'User1', text: 'Great shot!' }] },
+    { id: 2, src: '/image2.jpg', title: 'Image 2', location: 'Location 2', comments: [{ user: 'User2', text: 'Nice colors!' }] },
+    { id: 3, src: '/image3.jpg', title: 'Image 3', location: 'Location 3', comments: [{ user: 'User3', text: 'Inspiring work!' }] },
+    { id: 4, src: '/image4.jpg', title: 'Image 4', location: 'Location 4', comments: [{ user: 'User4', text: 'Lovely composition!' }] },
+    { id: 5, src: '/image5.jpg', title: 'Image 5', location: 'Location 5', comments: [{ user: 'User5', text: 'Awesome!' }] },
+    { id: 6, src: '/image6.jpg', title: 'Image 6', location: 'Location 6', comments: [{ user: 'User6', text: 'Wonderful!' }] },
+    { id: 7, src: '/image7.jpg', title: 'Image 7', location: 'Location 7', comments: [{ user: 'User7', text: 'Excellent!' }] },
+    { id: 8, src: '/image8.jpg', title: 'Image 8', location: 'Location 8', comments: [{ user: 'User8', text: 'Marvelous!' }] },
+    { id: 9, src: '/image9.jpg', title: 'Image 9', location: 'Location 9', comments: [{ user: 'User9', text: 'Amazing!' }] }
   ];
 
   const [open, setOpen] = useState(false);
@@ -84,7 +85,7 @@ const ProfilePhotographer = () => {
       <Grid container spacing={2}>
         {images.map((image) => (
           <Grid item xs={12} sm={6} md={4} key={image.id}>
-            <DribbbleShot image={image.src} title={image.title} location={image.location} />
+            <DribbbleShot image={image.src} title={image.title} location={image.location} comments={image.comments} />
           </Grid>
         ))}
       </Grid>
@@ -142,6 +143,7 @@ const ProfilePhotographer = () => {
           </Button>
         </DialogActions>
       </Dialog>
+      <MediaCard />
     </div>
   );
 };

@@ -26,7 +26,7 @@ export default function MediaCard() {
     >
       <Grid container spacing={2} alignItems="center">
         <Grid item sx={{ paddingLeft: 2 }}>
-          <ProfileAvatar imageUrl="/profilepic1.jpg" altText="Profile Picture" height="100px" width="100px" />
+          <ProfileAvatar imageUrl="/profilepic1.jpg" altText="Profile Picture" height="150px" width="150px" />
         </Grid>
         <Grid item xs>
           <CardContent>
@@ -39,7 +39,7 @@ export default function MediaCard() {
             </Typography>
           </CardContent>
           <CardActions>
-            <Button size="small" sx={{ fontFamily: 'League Spartan, sans-serif' }}>Share</Button>
+            <Button size="small" sx={{ fontFamily: 'League Spartan, sans-serif' }}>Connect</Button>
             <Button size="small" sx={{ fontFamily: 'League Spartan, sans-serif' }}>Learn More</Button>
           </CardActions>
         </Grid>

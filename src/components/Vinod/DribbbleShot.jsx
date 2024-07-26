@@ -8,8 +8,12 @@ import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import Divider from '@mui/material/Divider';
 
-const DribbbleShot = ({ image, title, location }) => {
+const DribbbleShot = ({ image, title, location, comments = [] }) => {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => setOpen(true);
@@ -71,12 +75,13 @@ const DribbbleShot = ({ image, title, location }) => {
             borderRadius: 'inherit',
           }}
         >
-          <Typography level="title-lg" textColor="#fff">
+          <Typography level="h5" textColor="#fff">
             {title}
           </Typography>
           <Typography
             startDecorator={<LocationOnRoundedIcon />}
             textColor="neutral.300"
+            fontSize="14px"
           >
             {location}
           </Typography>
@@ -103,7 +108,7 @@ const DribbbleShot = ({ image, title, location }) => {
           sx={{
             display: 'flex',
             justifyContent: 'space-between',
-            alignItems: 'center',
+            alignItems: 'flex-start',
             padding: 0,
             boxSizing: 'border-box',
             height: '100%',
@@ -114,26 +119,33 @@ const DribbbleShot = ({ image, title, location }) => {
             sx={{
               flex: 1,
               marginRight: 2,
-              '& img': {
-                width: '100%',
-                height: '100%',
-                objectFit: 'cover',
-                borderRadius: '8px',
-              },
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
             }}
           >
-            <img
+            <Box
+              component="img"
               src={image}
               alt={title}
               loading="lazy"
+              sx={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'contain',
+                borderRadius: '8px',
+              }}
             />
           </Box>
+
+          <Divider orientation="vertical" flexItem />
+
           <Box
             sx={{
               flex: 1,
               display: 'flex',
               flexDirection: 'column',
-              justifyContent: 'center',
+              justifyContent: 'flex-start',
               padding: 2,
               height: '100%',
             }}
@@ -144,9 +156,38 @@ const DribbbleShot = ({ image, title, location }) => {
             <Typography
               variant="h6"
               startDecorator={<LocationOnRoundedIcon />}
+              fontSize="16px"
             >
               {location}
             </Typography>
+
+            <Divider sx={{ marginY: 2 }} />
+
+            <Box
+              sx={{
+                flexGrow: 1,
+                overflowY: 'auto',
+              }}
+            >
+              <Typography variant="h6" sx={{ marginBottom: 1 }}>
+                Comments
+              </Typography>
+              <List>
+                {comments.map((comment, index) => (
+                  <React.Fragment key={index}>
+                    <ListItem alignItems="flex-start">
+                      <ListItemText 
+                        primary={comment.user} 
+                        primaryTypographyProps={{ fontSize: '14px', fontWeight: 'bold' }}
+                        secondary={comment.text} 
+                        secondaryTypographyProps={{ fontSize: '12px' }}
+                      />
+                    </ListItem>
+                    {index < comments.length - 1 && <Divider />}
+                  </React.Fragment>
+                ))}
+              </List>
+            </Box>
           </Box>
           <IconButton
             onClick={handleClose}
