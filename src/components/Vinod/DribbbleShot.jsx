@@ -3,6 +3,7 @@ import CardCover from '@mui/joy/CardCover';
 import CardContent from '@mui/joy/CardContent';
 import Typography from '@mui/joy/Typography';
 import LocationOnRoundedIcon from '@mui/icons-material/LocationOnRounded';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import Box from '@mui/joy/Box';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
@@ -14,8 +15,19 @@ import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import Avatar from '@mui/material/Avatar';
 
-const DribbbleShot = ({ image, title, location, initialComments = [] }) => {
+const DribbbleShot = ({
+  image,
+  title,
+  location,
+  date,
+  likes,
+  description,
+  author,
+  avatar,
+  initialComments = []
+}) => {
   const [open, setOpen] = React.useState(false);
   const [comments, setComments] = React.useState(initialComments);
   const [newComment, setNewComment] = React.useState('');
@@ -163,8 +175,19 @@ const DribbbleShot = ({ image, title, location, initialComments = [] }) => {
               justifyContent: 'flex-start',
               padding: 2,
               height: '100%',
+              overflowY: 'auto',
             }}
           >
+            <IconButton
+              onClick={handleClose}
+              sx={{ position: 'absolute', top: 8, right: 8 }}
+            >
+              <CloseIcon />
+            </IconButton>
+            <Box sx={{ display: 'flex', alignItems: 'center', marginBottom: 2 }}>
+              <Avatar src={avatar} alt={author} sx={{ marginRight: 2 }} />
+              <Typography variant="h6">{author}</Typography>
+            </Box>
             <Typography variant="h4" sx={{ marginBottom: 2 }}>
               {title}
             </Typography>
@@ -175,59 +198,61 @@ const DribbbleShot = ({ image, title, location, initialComments = [] }) => {
             >
               {location}
             </Typography>
-
-            <Divider sx={{ marginY: 2 }} />
-
-            <Box
-              sx={{
-                flexGrow: 1,
-                overflowY: 'auto',
-              }}
+            <Typography
+              variant="body2"
+              color="text.secondary"
+              sx={{ marginBottom: 2 }}
             >
-              <Typography variant="h6" sx={{ marginBottom: 1 }}>
-                Comments
+              {date}
+            </Typography>
+            <Box sx={{ display: 'flex', alignItems: 'center', marginBottom: 2 }}>
+              <FavoriteBorderIcon sx={{ marginRight: 1 }} />
+              <Typography variant="body2" color="text.secondary">
+                {likes} likes
               </Typography>
-              <List>
-                {comments.map((comment, index) => (
-                  <React.Fragment key={index}>
-                    <ListItem alignItems="flex-start">
-                      <ListItemText 
-                        primary={comment.user} 
-                        primaryTypographyProps={{ fontSize: '14px', fontWeight: 'bold' }}
-                        secondary={comment.text} 
-                        secondaryTypographyProps={{ fontSize: '12px' }}
-                      />
-                    </ListItem>
-                    {index < comments.length - 1 && <Divider />}
-                  </React.Fragment>
-                ))}
-              </List>
-              <Box sx={{ display: 'flex', marginTop: 2 }}>
-                <TextField
-                  fullWidth
-                  label="Add a comment"
-                  value={newComment}
-                  onChange={handleCommentChange}
-                  variant="outlined"
-                  size="small"
-                  sx={{ marginRight: 1 }}
-                />
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={handleAddComment}
-                >
-                  Post
-                </Button>
-              </Box>
+            </Box>
+            <Divider sx={{ marginY: 2 }} />
+            <Typography variant="body1" sx={{ marginBottom: 2 }}>
+              {description}
+            </Typography>
+            <Divider sx={{ marginY: 2 }} />
+            <Typography variant="h6" sx={{ marginBottom: 1 }}>
+              Comments
+            </Typography>
+            <List>
+              {comments.map((comment, index) => (
+                <React.Fragment key={index}>
+                  <ListItem alignItems="flex-start">
+                    <ListItemText
+                      primary={comment.user}
+                      primaryTypographyProps={{ fontSize: '14px', fontWeight: 'bold' }}
+                      secondary={comment.text}
+                      secondaryTypographyProps={{ fontSize: '12px' }}
+                    />
+                  </ListItem>
+                  {index < comments.length - 1 && <Divider />}
+                </React.Fragment>
+              ))}
+            </List>
+            <Box sx={{ display: 'flex', marginTop: 2 }}>
+              <TextField
+                fullWidth
+                label="Add a comment"
+                value={newComment}
+                onChange={handleCommentChange}
+                variant="outlined"
+                size="small"
+                sx={{ marginRight: 1 }}
+              />
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={handleAddComment}
+              >
+                Post
+              </Button>
             </Box>
           </Box>
-          <IconButton
-            onClick={handleClose}
-            sx={{ position: 'absolute', top: 8, right: 8 }}
-          >
-            <CloseIcon />
-          </IconButton>
         </DialogContent>
       </Dialog>
     </>

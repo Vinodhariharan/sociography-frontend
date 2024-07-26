@@ -4,9 +4,10 @@ import {
 } from '@mui/material';
 import ProfileAvatar from './ProfileAvatar';
 import DribbbleShot from './DribbbleShot';
-import MediaCard from './TestCard';
+import UploadDialog from './UploadDialog'; // Import the new UploadDialog component
 
-const ProfilePhotographer = () => {
+const About = () => {
+  // Ensure profileData is declared and initialized properly
   const profileData = {
     imageUrl: '/profilepic1.jpg',
     altText: 'Profile Picture',
@@ -55,32 +56,45 @@ const ProfilePhotographer = () => {
 
   return (
     <div style={{ padding: '20px' }}>
-      <Grid container spacing={2} alignItems="center">
-        <Grid item>
+      <Grid container spacing={4} alignItems="center">
+        <Grid item xs={12} md={4}>
           <ProfileAvatar imageUrl={profileData.imageUrl} altText={profileData.altText} />
         </Grid>
-        <Grid item xs>
-          <Typography variant="h5" sx={{ fontFamily: 'League Spartan, sans-serif', fontWeight: 'bold' }}>
+        <Grid item xs={12} md={8}>
+          <Typography variant="h4" sx={{ fontFamily: 'League Spartan, sans-serif', fontWeight: 'bold' }}>
             {profileData.name}
           </Typography>
-          <Typography variant="body1" sx={{ fontFamily: 'League Spartan, sans-serif', color: 'gray' }}>
+          <Typography variant="h6" sx={{ fontFamily: 'League Spartan, sans-serif', color: 'gray', marginBottom: '10px' }}>
             {profileData.email}
           </Typography>
-          <Typography variant="body2" sx={{ fontFamily: 'League Spartan, sans-serif', marginTop: '10px' }}>
+          <Typography variant="body1" sx={{ fontFamily: 'League Spartan, sans-serif', marginBottom: '10px' }}>
             {profileData.bio}
           </Typography>
-        </Grid>
-        <Grid item>
-          <Button variant="contained" color="primary" sx={{ fontFamily: 'League Spartan, sans-serif' }} onClick={handleClickOpen}>
-            Edit Profile
-          </Button>
-          <Button variant="contained" color="secondary" sx={{ fontFamily: 'League Spartan, sans-serif', marginTop: '10px' }}>
-            Contact Request
-          </Button>
+          <Typography variant="body1" sx={{ fontFamily: 'League Spartan, sans-serif', marginBottom: '10px' }}>
+            Contact: {profileData.contactDetails}
+          </Typography>
+          <Grid container spacing={2}>
+            <Grid item>
+              <Button variant="contained" color="primary" sx={{ fontFamily: 'League Spartan, sans-serif' }} onClick={handleClickOpen}>
+                Edit Profile
+              </Button>
+            </Grid>
+            <Grid item>
+              <Button variant="contained" color="secondary" sx={{ fontFamily: 'League Spartan, sans-serif' }}>
+                Contact Request
+              </Button>
+            </Grid>
+            <Grid item>
+              <UploadDialog
+                onUploadStart={() => console.log('Upload started')}
+                onUploadEnd={(success) => console.log(`Upload ${success ? 'succeeded' : 'failed'}`)}
+              />
+            </Grid>
+          </Grid>
         </Grid>
       </Grid>
 
-      <Divider sx={{ marginY: 2, marginX: 1, borderColor: 'black' }} />
+      <Divider sx={{ marginY: 4, borderColor: 'black' }} />
 
       <Grid container spacing={2}>
         {images.map((image) => (
@@ -147,4 +161,4 @@ const ProfilePhotographer = () => {
   );
 };
 
-export default ProfilePhotographer;
+export default About;
