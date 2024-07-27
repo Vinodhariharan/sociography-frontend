@@ -37,7 +37,7 @@ const Navbar = () => {
         <Toolbar sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <Typography 
             component={Link} 
-            to="/" 
+            to="/home " 
             variant="h6" 
             sx={{ 
               color: 'black', 

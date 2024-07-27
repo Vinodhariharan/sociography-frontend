@@ -24,7 +24,7 @@ const LoginPage = () => {
     console.log('Email:', email);
     console.log('Password:', password);
     // Redirect to profile page on successful login
-    navigate('/profile');
+    navigate('/home');
   };
 
   const handleRegister = () => {
