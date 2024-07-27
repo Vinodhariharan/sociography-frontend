@@ -58,7 +58,7 @@ const PhotographerSignUp = () => {
     console.log('Email:', email);
 
     // Redirect to photographer dashboard on successful signup
-    navigate('/photographer-dashboard');
+    navigate('/home');
   };
 
   return (

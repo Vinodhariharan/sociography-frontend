@@ -34,7 +34,7 @@ const PartnerSignUp = () => {
     console.log('Tagline:', tagline);
     console.log('Description:', description);
     // Redirect to partner dashboard or confirmation page
-    navigate('/partner-dashboard');
+    navigate('/home');
   };
 
   return (
