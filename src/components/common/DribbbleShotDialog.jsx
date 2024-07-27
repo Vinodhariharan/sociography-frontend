@@ -18,6 +18,8 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import Typography from '@mui/joy/Typography';
 import LocationOnRoundedIcon from '@mui/icons-material/LocationOnRounded';
 
+
+
 const DribbbleShotDialog = ({
   open,
   handleClose,
@@ -60,27 +62,32 @@ const DribbbleShotDialog = ({
         overflow: 'hidden',
       }}
     >
-      <Box
-        sx={{
-          flex: 2,
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          backgroundColor: 'black',
-        }}
-      >
-        <Sheet
-          component="img"
-          src={image}
-          alt={description}
-          loading="lazy"
-          sx={{
-            maxWidth: '100%',
-            objectFit: 'contain',
-            backgroundColor: 'black',
-          }}
-        />
-      </Box>
+<Box
+  sx={{
+    flex: 2,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'black',
+    overflow: 'hidden', // Ensures content does not overflow
+    height: '100%', // Ensures Box takes up available height
+    width: '100%', // Ensures Box takes up available width
+  }}
+>
+  <Sheet
+    component="img"
+    src={image}
+    alt={description}
+    loading="lazy"
+    sx={{
+      maxWidth: '100%',
+      maxHeight: '100%',
+      objectFit: 'contain', // Ensures the image scales proportionally
+    }}
+  />
+</Box>
+
+
 
       <Divider orientation="vertical" flexItem />
 

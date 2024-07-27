@@ -3,7 +3,7 @@ import {
   Grid, Typography, Button, Divider, Dialog, DialogTitle, DialogContent, DialogActions, TextField
 } from '@mui/material';
 import { Chip, Grid as JoyGrid, Typography as JoyTypography, Sheet } from '@mui/joy';
-import ProfileAvatar from './ProfileAvatar';
+import ProfileAvatar from '../common/ProfileAvatar';
 import DribbbleShot from '../common/DribbbleShot';
 import UploadDialog from './UploadDialog'; // Import the new UploadDialog component
 

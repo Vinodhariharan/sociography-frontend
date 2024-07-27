@@ -4,7 +4,6 @@ import CardContent from '@mui/joy/CardContent';
 import Typography from '@mui/joy/Typography';
 import LocationOnRoundedIcon from '@mui/icons-material/LocationOnRounded';
 import Box from '@mui/joy/Box';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import DribbbleShotDialog from './DribbbleShotDialog'; // Adjust the path as necessary
 
 const DribbbleShot = ({

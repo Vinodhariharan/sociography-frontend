@@ -3,7 +3,7 @@ import {
   Box, Typography, Button, Dialog, DialogTitle, DialogContent, DialogActions, Input, Grid
 } from '@mui/material';
 import { Sheet } from '@mui/joy';
-import ProfileAvatar from './ProfileAvatar';
+import ProfileAvatar from '../common/ProfileAvatar';
 
 const PartnerProfile = () => {
   const partnerData = {

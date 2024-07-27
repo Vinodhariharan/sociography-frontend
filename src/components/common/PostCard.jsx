@@ -73,7 +73,7 @@ const PostCard = ({
       >
         <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
           <Avatar src={avatar} alt={author} sx={{ mr: 2 }} />
-          <Typography variant="body2" fontWeight="bold">
+          <Typography variant="plain" fontWeight="bold">
             {author}
           </Typography>
           <Box sx={{ display: 'flex', alignItems: 'center', ml: 'auto' }}>
@@ -84,9 +84,6 @@ const PostCard = ({
             >
               <FavoriteBorderRoundedIcon />
             </IconButton>
-            <Typography variant="body2" color="text.secondary" sx={{ ml: 1 }}>
-              {likes}
-            </Typography>
           </Box>
         </Box>
         <Box sx={{ mt: 'auto' }}>
