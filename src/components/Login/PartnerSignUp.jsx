@@ -57,11 +57,11 @@ const PartnerSignUp = () => {
         // Assuming the token is included in the response data
         const token = response.data.split('Token: ')[1];
         console.log(response.data.split('Token: ')[1]);
-        await localStorage.setItem('token', token);
-        await localStorage.setItem('email', email);
-        await localStorage.setItem('mode', 'partner');
-        await localStorage.setItem('photographerId', response.data.photographerId);
-        await signup(); // Adjust according to response structure
+        localStorage.setItem('token', token);
+        localStorage.setItem('email', email);
+        localStorage.setItem('mode', 'partner');
+        localStorage.setItem('photographerId', response.data.photographerId);
+        signup(); // Adjust according to response structure
 
         // Redirect or handle successful signup
         navigate('/');

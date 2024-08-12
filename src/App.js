@@ -7,10 +7,7 @@ import Login from './components/Login/Login';
 import SignUpSelection from './components/Login/SignUpSelection';
 import PartnerSignUp from './components/Login/PartnerSignUp';
 import PhotographerSignUp from './components/Login/PhotographerSignUp';
-// import SocialMediaFeed from './components/common/LandingPage';
-import SearchPage from './components/SearchComponents/SearchPage';
 import SearchResultsPage from './components/SearchComponents/SearchResultsPage';
-import ProfilePhotographer from './components/Profile/ProfilePhotographer';
 import PartnerList from './components/PartnerListing/PartnerList';
 import { AuthProvider } from './components/AuthContext';
 import PrivateRoute from './components/PrivateRoute';
@@ -33,8 +30,6 @@ function App() {
   const location = useLocation();
   const hideNavAndFooter = ["/login", "/signup-selection", "/photographer-signup", "/partner-signup"].includes(location.pathname);
   
-  const isProfilePage = location.pathname.includes("/partner-profile") || location.pathname.includes("/profile-photographer");
-
   const gradientBackground = {
     background: '#e2e5e9',
     backgroundSize: 'auto',
@@ -43,14 +38,6 @@ function App() {
     minHeight: '100vh',
     display: 'flex',
     flexDirection: 'column',
-  };
-
-  const containerStyle = {
-    flex: 1,
-    boxShadow: isProfilePage ? '0px 4px 8px rgba(0, 0, 0, 0.2)' : 'none',
-    backgroundColor: isProfilePage ? 'rgba(255, 255, 255, 0.8)' : 'transparent',
-    padding: '20px',
-    marginTop: 4,
   };
 
   return (
@@ -64,7 +51,6 @@ function App() {
             <Route path="/photographer-signup" element={<PhotographerSignUp />} />
             <Route path="/partner-signup" element={<PartnerSignUp />} />
             <Route path="/" element={<PageWrapper><SocialMediaFeed /></PageWrapper>} />
-            {/* <Route path="/search" element={<PageWrapper><SearchPage /></PageWrapper>} /> */}
             <Route path="/search-results" element={<PageWrapper><SearchResultsPage /></PageWrapper>} />
             <Route
               path="/partner-profile/:partnerId"
