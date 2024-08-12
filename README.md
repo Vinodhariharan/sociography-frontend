@@ -89,7 +89,7 @@ Sociography is a social media platform designed specifically for photographers. 
 ### 1. Clone the Repository
 Clone the backend repository to your local machine:
 ```
-git clone https://github.com/yourusername/sociography-backend.git
+git clone https://github.com/vinodhariharan/sociography-backend.git
 ```
 
 1.  Navigate to the backend directory:

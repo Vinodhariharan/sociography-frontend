@@ -1,9 +1,19 @@
 // src/components/AuthContext.js
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
-import{jwtDecode} from 'jwt-decode';
+import {jwtDecode} from 'jwt-decode';
 
 const AuthContext = createContext();
+
+// Function to fetch authState from localStorage
+export const fetchAuthStateFromLocalStorage = () => {
+  const token = localStorage.getItem('token');
+  const email = localStorage.getItem('email');
+  const mode = localStorage.getItem('mode') || 'guest';
+  const photographerId = localStorage.getItem('photographerId');
+
+  return { token, email, mode, photographerId };
+};
 
 export const AuthProvider = ({ children }) => {
   const [authState, setAuthState] = useState({
@@ -14,14 +24,8 @@ export const AuthProvider = ({ children }) => {
   });
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    const email = localStorage.getItem('email');
-    const mode = localStorage.getItem('mode') || 'guest';
-    const photographerId = localStorage.getItem('photographerId'); // Retrieve photographerId from local storage
-
-    if (token) {
-      setAuthState({ token, email, mode, photographerId });
-    }
+    const storedAuthState = fetchAuthStateFromLocalStorage();
+    setAuthState(storedAuthState);
   }, []);
 
   const login = async (email, password) => {
@@ -54,17 +58,9 @@ export const AuthProvider = ({ children }) => {
   };
 
   const signup = () => {
-    const token = localStorage.getItem('token');
-    const email = localStorage.getItem('email');
-    const mode = localStorage.getItem('mode') || 'guest';
-    const photographerId = localStorage.getItem('photographerId');
-    localStorage.getItem('token', token);
-      localStorage.getItem('email', email);
-      localStorage.getItem('mode', mode);
-      localStorage.getItem('photographerId', photographerId); 
-    setAuthState({ token, email, mode, photographerId });
-
-  }
+    const storedAuthState = fetchAuthStateFromLocalStorage();
+    setAuthState(storedAuthState);
+  };
 
   const logout = () => {
     localStorage.removeItem('token');
@@ -75,7 +71,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ authState, login, logout,signup }}>
+    <AuthContext.Provider value={{ authState, login, logout, signup }}>
       {children}
     </AuthContext.Provider>
   );

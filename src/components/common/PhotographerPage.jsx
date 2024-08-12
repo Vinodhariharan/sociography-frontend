@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {
-  Box, Typography, Button, Dialog, DialogTitle, DialogContent, DialogActions, Input, Grid, Divider
+  Box, Typography, Button, Grid,
 } from '@mui/material';
 import { Container, Sheet } from '@mui/joy';
 import ProfileAvatar from '../common/ProfileAvatar';
@@ -15,7 +15,7 @@ const PhotographerPage = () => {
 
   const [profileData, setProfileData] = useState(null);
   const [images, setImages] = useState([]);
-  const [open, setOpen] = useState(false);
+  // const [open, setOpen] = useState(false);
   const [formData, setFormData] = useState({});
   const [contactRequestSent, setContactRequestSent] = useState(false);
 

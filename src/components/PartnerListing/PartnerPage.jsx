@@ -6,6 +6,7 @@ import { Container, Sheet } from '@mui/joy';
 import ProfileAvatar from '../common/ProfileAvatar';
 import axiosInstance from '../../axiosInstance'; // Import the custom axios instance
 import { useParams } from 'react-router-dom';
+import { convertToBase64 } from '../../utils/convertToBase64';
 
 const PartnerPage = () => {
     const { partnerId } = useParams();
@@ -80,7 +81,7 @@ const PartnerPage = () => {
           }}
         >
           <ProfileAvatar 
-            imageUrl={partnerData.imageUrl} 
+            imageUrl={convertToBase64(partnerData.profilePic)} 
             altText={`${partnerData.name}'s Profile Picture`} 
             sx={{ width: 182, height: 182 }} 
           />
@@ -98,7 +99,7 @@ const PartnerPage = () => {
             >
               {partnerData.tagline}
             </Typography>
-            <Sheet
+            {/* <Sheet
               sx={{
                 bgcolor: 'background.level1',
                 borderRadius: 'sm',
@@ -121,7 +122,7 @@ const PartnerPage = () => {
                 </Typography>
                 <Typography fontWeight="lg">{partnerData.contactedCount}</Typography>
               </div>
-            </Sheet>
+            </Sheet> */}
             <Box sx={{ display: 'flex', gap: 1.5, mt: 2 }}>
               <Button
                 variant="contained"

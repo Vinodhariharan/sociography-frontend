@@ -121,36 +121,17 @@ import PostCard from './PostCard'; // Adjust the path as necessary
 import DribbbleShotDialog from '../common/Post/DribbbleShotDialog'; // Adjust the path as necessary
 import RequestsSection from './RequestsSection'; // Adjust the path as necessary
 import { Divider, LinearProgress } from '@mui/material';
-import SuggestedProfileList from './SuggestedProfileList';
 import ProfileInfo from './ProfileInfo';
 import MediaCard from './AdCover';
 import axiosInstance from '../../axiosInstance';
 import {useAuth} from '../AuthContext'
 
 import { convertToBase64 } from '../../utils/convertToBase64';
-const dummyRequests = [
-  {
-    avatar: '/profilepic4.jpg', // Ensure this path is correct
-    name: 'Creative User 1',
-  },
-  {
-    avatar: '/profilepic5.jpg', // Ensure this path is correct
-    name: 'Creative User 2',
-  },
-  {
-    avatar: '/profilepic6.jpg', // Ensure this path is correct
-    name: 'Creative User 3',
-  },
-  {
-    avatar: '/profilepic2.png', // Ensure this path is correct
-    name: 'Creative User 4',
-  },
-];
 
 const SocialMediaFeed = () => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [selectedPhoto, setSelectedPhoto] = useState(null);
-  const [selectedRequests, setSelectedRequests] = useState(dummyRequests);
+  const [selectedRequests, setSelectedRequests] = useState([]);
   const [posts, setPosts] = useState([]);
   const [page, setPage] = useState(0);
   const [loading, setLoading] = useState(false);
@@ -158,7 +139,33 @@ const SocialMediaFeed = () => {
 
   useEffect(() => {
     fetchPosts(page);
+    fetchRequests();
   }, [page]);
+
+  const fetchRequests = async () => {
+    try {
+      console.log(authState)
+      const { mode: recipientType, photographerId: recipientId } = authState; 
+
+      const response = await axiosInstance.get(
+        `/requests/${recipientType}/${recipientId}/PENDING`
+      );
+      const data = response.data;
+
+      console.log('Fetched requests:', data);
+
+      if (Array.isArray(data)) {
+        setSelectedRequests(data);
+      } else {
+        console.error('Expected an array but received:', data);
+        setSelectedRequests([]); // Default to an empty array if the format is not as expected
+      }
+    } catch (error) {
+      console.error('Error fetching requests:', error);
+      setSelectedRequests([]); // Default to an empty array on error
+    }
+  };
+
 
   const fetchPosts = async (page) => {
     setLoading(true);
@@ -209,16 +216,37 @@ const SocialMediaFeed = () => {
     setDialogOpen(false);
     setSelectedPhoto(null);
   };
-
-  const handleConfirmRequest = (index) => {
-    const updatedRequests = selectedRequests.filter((_, i) => i !== index);
-    setSelectedRequests(updatedRequests);
+  
+  const handleConfirmRequest = async (index) => {
+    try {
+      const requestId = selectedRequests[index].id;
+      await axiosInstance.put(`/requests/${requestId}/status`, 'ACCEPTED',{
+        headers: {
+          'Content-Type': 'text/plain',
+        },
+      });
+      const updatedRequests = selectedRequests.filter((_, i) => i !== index);
+      setSelectedRequests(updatedRequests);
+    } catch (error) {
+      console.error('Error confirming request:', error);
+    }
   };
-
-  const handleRejectRequest = (index) => {
-    const updatedRequests = selectedRequests.filter((_, i) => i !== index);
-    setSelectedRequests(updatedRequests);
+  
+  const handleRejectRequest = async (index) => {
+    try {
+      const requestId = selectedRequests[index].id;
+      await axiosInstance.put(`/requests/${requestId}/status`, 'REJECTED', {
+        headers: {
+          'Content-Type': 'text/plain',
+        },
+      });
+            const updatedRequests = selectedRequests.filter((_, i) => i !== index);
+      setSelectedRequests(updatedRequests);
+    } catch (error) {
+      console.error('Error rejecting request:', error);
+    }
   };
+  
 
   const handleScroll = (e) => {
     const { scrollHeight, scrollTop, clientHeight } = e.target.documentElement;
@@ -241,6 +269,7 @@ const SocialMediaFeed = () => {
             requests={selectedRequests} 
             onConfirm={handleConfirmRequest} 
             onReject={handleRejectRequest} 
+            mode={authState.mode}
           />
         </Box>
       </Box>
