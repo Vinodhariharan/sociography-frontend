@@ -110,7 +110,7 @@ git clone https://github.com/vinodhariharan/sociography-backend.git
 1.  Clone the repository:
 
     ```
-    git clone https://github.com/yourusername/sociography-frontend.git
+    git clone https://github.com/vinodhariharan/sociography-frontend.git
     ```
 
 3.  Navigate to the frontend directory:
