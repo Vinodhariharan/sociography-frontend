@@ -12,6 +12,7 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import CameraAltIcon from '@mui/icons-material/CameraAlt'; // Camera icon
 import AspectRatio from '@mui/joy/AspectRatio';
 import CardOverflow from '@mui/joy/CardOverflow';
+import { formatDate } from '../../utils/formatDate';
 
 const PostCard = ({
   src,
@@ -130,7 +131,7 @@ const PostCard = ({
               </Typography>
             </Box>
             <Typography variant="body2" color="text.secondary" sx={{ fontWeight: 'bold' }}>
-              {date}
+              {formatDate(date)}
             </Typography>
           </Box>
           {comments && comments.length > 0 && (

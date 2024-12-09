@@ -17,6 +17,8 @@ import PartnerPage from './components/PartnerListing/PartnerPage';
 import NotFound from './components/common/NotFound';
 import SocialMediaFeed from './components/LandingPage/LandingPage';
 import PhotographerPage from './components/common/PhotographerPage';
+import ContactForm from './components/common/ContactForm';
+import PostsPage from './components/common/testAPI';
 
 const PageWrapper = ({ children }) => {
   return (
@@ -47,10 +49,12 @@ function App() {
           {!hideNavAndFooter && <Navbar />}
           <Routes>
             <Route path="/login" element={<Login />} />
+            <Route path="/testAPI" element={<PostsPage />} />
             <Route path="/signup-selection" element={<SignUpSelection />} />
             <Route path="/photographer-signup" element={<PhotographerSignUp />} />
             <Route path="/partner-signup" element={<PartnerSignUp />} />
-            <Route path="/" element={<PageWrapper><SocialMediaFeed /></PageWrapper>} />
+            <Route path="/" element={<SocialMediaFeed/>} />
+            <Route path="/contact-form" element={<ContactForm/>} />
             <Route path="/search-results" element={<PageWrapper><SearchResultsPage /></PageWrapper>} />
             <Route
               path="/partner-profile/:partnerId"

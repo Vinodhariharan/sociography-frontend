@@ -113,7 +113,7 @@ const StyledButton = styled(Button)({
 
 const SecondStep = ({ dob, profilePic, selfInfo, location, contactNo, email, handleProfilePicChange, handleSignup, handleBack, setEmail, setDob, setLocation, setSelfInfo }) => {
   return (
-    <StyledPaper>
+    <StyledPaper >
       <Typography variant="h4" align="center" gutterBottom sx={{ fontFamily: 'League Spartan, sans-serif', fontWeight: 'bold' }}>
         Photographer Sign Up
       </Typography>

@@ -18,8 +18,10 @@ const PhotographerPage = () => {
   // const [open, setOpen] = useState(false);
   const [formData, setFormData] = useState({});
   const [contactRequestSent, setContactRequestSent] = useState(false);
+  const [isFollowing, setIsFollowing] = useState(false);
 
-  const {authState} = useAuth();
+
+  const { authState } = useAuth();
 
   useEffect(() => {
     if (!photographerId) return;
@@ -38,16 +40,42 @@ const PhotographerPage = () => {
       .then(response => {
         const imagesWithBase64 = response.data.map(image => ({
           ...image,
-          picture: convertToBase64(image.picture)
+          picture: image.picture
         }));
         setImages(imagesWithBase64);
       })
       .catch(error => console.error('Error fetching pictures:', error));
+
+    axiosInstance.get('/followers/is-following', {
+      params: {
+        followerId: authState.photographerId,
+        followingId: photographerId
+      }
+    })
+      .then(response => {
+        setIsFollowing(response.data);
+      })
+      .catch(error => console.error('Error checking follow status:', error));
+
   }, [photographerId]);
 
   const handleContactRequest = () => {
     setContactRequestSent(true);
     console.log('Contact request sent');
+  };
+
+  const toggleFollow = () => {
+    axiosInstance.post('/followers/toggle-follow', null, {
+      params: {
+        followerId: authState.photographerId,
+        followingId: photographerId
+      }
+    })
+      .then(response => {
+        setIsFollowing(!isFollowing); // Toggle follow status
+        console.log(response.data);
+      })
+      .catch(error => console.error('Error toggling follow status:', error));
   };
 
   if (!profileData) {
@@ -68,20 +96,20 @@ const PhotographerPage = () => {
             pb: 2,
           }}
         >
-          <ProfileAvatar 
-            imageUrl={`data:image/png;base64,${profileData.profilePic}`} 
-            altText="Profile Picture" 
-            sx={{ width: 182, height: 182 }} 
+          <ProfileAvatar
+            imageUrl={`data:image/png;base64,${profileData.profilePic}`}
+            altText="Profile Picture"
+            sx={{ width: 182, height: 182 }}
           />
           <Box sx={{ flex: 1 }}>
-            <Typography 
-              variant="h3" 
+            <Typography
+              variant="h3"
               sx={{ fontFamily: 'League Spartan, sans-serif', fontWeight: 'bold' }}
             >
               {profileData.name}
             </Typography>
-            <Typography 
-              variant="subtitle1" 
+            <Typography
+              variant="subtitle1"
               color="text.secondary"
               sx={{ fontFamily: 'League Spartan, sans-serif' }}
             >
@@ -118,31 +146,31 @@ const PhotographerPage = () => {
               </div>
             </Sheet>
             <Box sx={{ display: 'flex', gap: 1.5, mt: 2 }}>
-            <>
-      {authState.mode !== 'photographer' && (
-        <Button
-          variant="contained"
-          color="secondary"
-          onClick={handleContactRequest}
-          disabled={contactRequestSent}
-          sx={{ fontFamily: 'League Spartan, sans-serif' }}
-        >
-          {contactRequestSent ? 'Request Sent' : 'Contact Request'}
-        </Button>
-      )}
-    </>
-    <>
-      {authState.mode !== 'partner' && (
-        <Button
-          variant="contained"
-          color="primary"
-        //   onClick={handleFollow}
-          sx={{ fontFamily: 'League Spartan, sans-serif' }}
-        >
-          Follow
-        </Button>
-      )}
-    </>
+              <>
+                {authState.mode !== 'photographer' && (
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    onClick={handleContactRequest}
+                    disabled={contactRequestSent}
+                    sx={{ fontFamily: 'League Spartan, sans-serif' }}
+                  >
+                    {contactRequestSent ? 'Request Sent' : 'Contact Request'}
+                  </Button>
+                )}
+              </>
+              <>
+                {authState.mode !== 'partner' && (
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={toggleFollow}
+                    sx={{ fontFamily: 'League Spartan, sans-serif' }}
+                  >
+                    {isFollowing ? 'Unfollow' : 'Follow'}
+                  </Button>
+                )}
+              </>
             </Box>
           </Box>
         </Box>
@@ -153,16 +181,18 @@ const PhotographerPage = () => {
             <Grid item xs={12} sm={6} md={4} key={image.id}>
               <DribbbleShot
                 id={image.id}
-                image={image.picture}
+                image={image.picture} // Assuming the image is already in the correct format or will be handled by DribbbleShot
                 description={image.description}
                 location={image.location}
-                date={image.date}
+                date={image.timestamp}
                 likes={image.likes}
                 author={profileData.name}
-                avatar={`data:image/png;base64,${profileData.profilePic}`}
+                avatar={profileData.profilePic ? profileData.profilePic : null} // Conditional to ensure avatar only renders if profilePic exists
                 category={image.category}
                 initialComments={image.comments}
+                photographerId={authState.photographerId} // Add photographerId from auth state if needed for consistency
               />
+
             </Grid>
           ))}
         </Grid>

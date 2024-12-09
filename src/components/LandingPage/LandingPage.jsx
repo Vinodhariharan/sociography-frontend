@@ -10,6 +10,7 @@ import axiosInstance from '../../axiosInstance';
 import {useAuth} from '../AuthContext'
 
 import { convertToBase64 } from '../../utils/convertToBase64';
+import SuggestedProfileList from './SuggestedProfileList';
 
 const SocialMediaFeed = () => {
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -28,7 +29,7 @@ const SocialMediaFeed = () => {
   const fetchRequests = async () => {
     try {
       console.log(authState)
-      const { mode: recipientType, photographerId: recipientId } = authState; 
+      const { mode: recipientType, photographerId: recipientId } = localStorage; 
 
       const response = await axiosInstance.get(
         `/requests/${recipientType}/${recipientId}/PENDING`
@@ -57,6 +58,7 @@ const SocialMediaFeed = () => {
       const data = response.data;
       const convertedPosts = await Promise.all(data.content.map(async (post) => {
         const base64Image = convertToBase64(post.picture);
+        console.log(post);
         return {
           ...post,
         };
@@ -124,10 +126,10 @@ const SocialMediaFeed = () => {
   }, [loading]);
 
   return (
-    <Box display="flex" gap={2} p={2}>
-      <Box width={{ xs: '100%', md: '25%' }} display="flex" flexDirection="column" gap={2}>
-        <ProfileInfo />
+    <Box display="flex" sx={{marginTop:'75px'}} gap={2} p={2}>
+      <Box width={{ xs: '100%', md: '25%' }} sx={{mt:2}} display="flex" flexDirection="column" gap={2}>
         <Box sx={{ position: 'sticky', top: '75px', mt: 2 }}>
+        <ProfileInfo />
           <RequestsSection 
             requests={selectedRequests} 
             onConfirm={handleConfirmRequest} 
@@ -162,7 +164,7 @@ const SocialMediaFeed = () => {
       </Box>
       <Divider orientation="vertical" flexItem />
       <Box width={{ xs: '100%', md: '25%' }} display="flex" flexDirection="column" gap={2}>
-        {/* <SuggestedProfileList /> */}
+        {/*<SuggestedProfileList />*/}
         <Box sx={{ position: 'sticky', top: '75px', }}>
           <MediaCard />
         </Box>
@@ -183,6 +185,7 @@ const SocialMediaFeed = () => {
           camera={selectedPhoto.camera}
           id={selectedPhoto.id}
           photographerId={authState.photographerId}
+          picAuthId={selectedPhoto.photographer.id}
         />
       )}
     </Box>

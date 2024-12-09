@@ -1,7 +1,7 @@
 // src/components/LoginPage.js
 import React, { useState } from 'react';
 import { Button, Grid, Typography, Card, CardContent, CardMedia, Box, IconButton } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { styled } from '@mui/joy/styles';
 import Input from '@mui/joy/Input';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
@@ -187,7 +187,10 @@ const LoginPage = () => {
               variant="h4"
               align="center"
               gutterBottom
-              sx={{ fontFamily: 'League Spartan, sans-serif', fontWeight: 'bold' }}
+              component={Link}
+              to='/'
+
+              sx={{textDecoration:'none', color:'black', fontFamily: 'League Spartan, sans-serif', fontWeight: 'bold' }}
             >
               SocioGraphy.
             </Typography>
