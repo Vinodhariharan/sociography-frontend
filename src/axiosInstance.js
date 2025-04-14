@@ -3,7 +3,7 @@ import axios from 'axios';
 import { getToken } from './services/AuthService';
 
 const instance = axios.create({
-  baseURL: 'https://3.106.239.84:8080', // Change to your API URL
+  baseURL: 'http://3.106.239.84:8080', // Change to your API URL
 });
 
 instance.interceptors.request.use(
