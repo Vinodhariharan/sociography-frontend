@@ -1,10 +1,12 @@
 // src/axiosInstance.js
 import axios from 'axios';
 import { getToken } from './services/AuthService';
-const baseUrl = process.env.VITE_API_BASE_URL; // Fallback to localhost if env variable is not set
+
+const baseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080';
+console.log('Base URL:', baseUrl);
 
 const instance = axios.create({
-  baseURL: baseUrl, // Change to your API URL
+  baseURL: baseUrl,
 });
 
 instance.interceptors.request.use(
