@@ -1,6 +1,5 @@
 // src/services/AuthService.js
 import axios from 'axios';
-const baseUrl = import.meta.env.  REACT_APP_API_BASE_URL; // Fallback to localhost if env variable is not set
 
 const API_URL = '/api/auth/login';
 
