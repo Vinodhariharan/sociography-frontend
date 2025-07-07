@@ -24,7 +24,7 @@ const About = () => {
     console.log(authState.photographerId);
 
     // Fetch profile data
-    fetch(`http://3.106.239.84:8080/photographers/email/${email}`, {
+    fetch(`http://localhost:8080/photographers/email/${email}`, {
       headers: {
         'Authorization': `Bearer ${token}`
       },
@@ -38,7 +38,7 @@ const About = () => {
       .catch(error => console.error('Error fetching profile data:', error));
 
     // Fetch images
-    fetch(`http://3.106.239.84:8080/photographers/${email}/pictures`, {
+    fetch(`http://sociography-bend-gxfqbzbxhnghg2hz.southeastasia-01.azurewebsites.net/photographers/${email}/pictures`, {
       headers: {
         'Authorization': `Bearer ${token}`
       },
@@ -102,7 +102,7 @@ const About = () => {
   const handleProfileSave = async () => {
     try {
       const email = authState.email;
-      const response = await fetch(`http://3.106.239.84:8080/photographers/email/${email}/edit`, {
+      const response = await fetch(`http://localhost:8080/photographers/email/${email}/edit`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json','Authorization': `Bearer ${authState.token}` },
         body: JSON.stringify(formData),

@@ -30,7 +30,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-      const response = await axios.post('http://3.106.239.84:8080/api/auth/login', null, {
+      const response = await axios.post('http://localhost:8080/api/auth/login', null, {
         params: {
           email,
           password,
