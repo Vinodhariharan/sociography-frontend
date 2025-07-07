@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import axiosInstance from '../../axiosInstance'; // Adjust the import path as necessary
 
 const LoginPage = () => {
   const [username, setUsername] = useState('');
@@ -8,15 +9,16 @@ const LoginPage = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post(`https://sociography-bend-gxfqbzbxhnghg2hz.southeastasia-01.azurewebsites.net/api/auth/login`, null, {
-        params: {
-          username,
-          password
-        },
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        }
-      });
+      const response = await axiosInstance.post('/api/auth/login', null, {
+  params: {
+    username,
+    password
+  },
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded'
+  }
+});
+
   
       if (response.status === 200) {
         // Save token to local storage (or context)

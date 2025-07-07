@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import DribbbleShot from '../common/Post/DribbbleShot';
-import axios from 'axios';
+import axiosInstance from '../../axiosInstance';
 import { CircularProgress, LinearProgress } from '@mui/joy';
 import { useAuth } from '../AuthContext';
 
@@ -20,9 +20,9 @@ const SearchResultsPage = () => {
   useEffect(() => {
     const fetchResults = async () => {
       try {
-        const response = await axios.get('https://sociography-bend-gxfqbzbxhnghg2hz.southeastasia-01.azurewebsites.net/pictures/search', {
-          params: { keyword: query }
-        });
+       const response = await axiosInstance.get('/pictures/search', {
+        params: { keyword: query }
+      });
         setResults(response.data);
         setLoading(false);
       } catch (error) {

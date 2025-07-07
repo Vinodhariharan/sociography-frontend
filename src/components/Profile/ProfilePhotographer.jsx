@@ -8,6 +8,7 @@ import DribbbleShot from '../common/Post/DribbbleShot';
 import UploadDialog from './UploadDialog';
 import { convertToBase64 } from '../../utils/convertToBase64';
 import { useAuth } from '../AuthContext';
+import axiosInstance from '../../axiosInstance';
 
 const About = () => {
   const { authState } = useAuth();
@@ -18,45 +19,50 @@ const About = () => {
   const [contactRequestSent, setContactRequestSent] = useState(false);
 
   useEffect(() => {
-    if (!authState) return;
-    const token = authState.token;
-    const email = authState.email;
-    console.log(authState.photographerId);
+  if (!authState) return;
 
-    // Fetch profile data
-    fetch(`https://sociography-bend-gxfqbzbxhnghg2hz.southeastasia-01.azurewebsites.net/photographers/email/${email}`, {
-      headers: {
-        'Authorization': `Bearer ${token}`
-      },
-      credentials: 'include',
-    })
-      .then(response => response.json())
-      .then(data => {
-        setProfileData(data.photographer);
-        setFormData(data.photographer);
-      })
-      .catch(error => console.error('Error fetching profile data:', error));
+  const token = authState.token;
+  const email = authState.email;
+  console.log(authState.photographerId);
 
-    // Fetch images
-    fetch(`https://sociography-bend-gxfqbzbxhnghg2hz.southeastasia-01.azurewebsites.net/photographers/${email}/pictures`, {
-      headers: {
-        'Authorization': `Bearer ${token}`
-      },
-      credentials: 'include',
-    })
-      .then(response => response.json())
-      .then(data => {
-        const imagesWithBase64 = data.map(image => ({
-          ...image,
-          picture: image.picture
-        }));
-        setImages(imagesWithBase64);
-        for (const element of data) {
-          console.log(element.id);
-        }
-      })
-      .catch(error => console.error('Error fetching pictures:', error));
-  }, [authState]);
+  const fetchProfileAndImages = async () => {
+    try {
+      // Fetch profile data
+      const profileResponse = await axiosInstance.get(`/photographers/email/${email}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        },
+        withCredentials: true,
+      });
+
+      setProfileData(profileResponse.data.photographer);
+      setFormData(profileResponse.data.photographer);
+
+      // Fetch images
+      const imagesResponse = await axiosInstance.get(`/photographers/${email}/pictures`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        },
+        withCredentials: true,
+      });
+
+      const imagesWithBase64 = imagesResponse.data.map(image => ({
+        ...image,
+        picture: image.picture
+      }));
+      setImages(imagesWithBase64);
+
+      for (const element of imagesResponse.data) {
+        console.log(element.id);
+      }
+
+    } catch (error) {
+      console.error('Error fetching profile or pictures:', error);
+    }
+  };
+
+  fetchProfileAndImages();
+}, [authState]);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -102,11 +108,12 @@ const About = () => {
   const handleProfileSave = async () => {
     try {
       const email = authState.email;
-      const response = await fetch(`https://sociography-bend-gxfqbzbxhnghg2hz.southeastasia-01.azurewebsites.net/photographers/email/${email}/edit`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json','Authorization': `Bearer ${authState.token}` },
-        body: JSON.stringify(formData),
-      });
+      const response = await axiosInstance.put(`/photographers/email/${email}/edit`, formData, {
+  headers: {
+    Authorization: `Bearer ${authState.token}`,
+    'Content-Type': 'application/json',
+  },
+});
       console.log(response);
   
       if (!response.ok) {
