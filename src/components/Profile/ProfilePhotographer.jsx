@@ -38,7 +38,7 @@ const About = () => {
       .catch(error => console.error('Error fetching profile data:', error));
 
     // Fetch images
-    fetch(`http://sociography-bend-gxfqbzbxhnghg2hz.southeastasia-01.azurewebsites.net/photographers/${email}/pictures`, {
+    fetch(`https://sociography-bend-gxfqbzbxhnghg2hz.southeastasia-01.azurewebsites.net/photographers/${email}/pictures`, {
       headers: {
         'Authorization': `Bearer ${token}`
       },
