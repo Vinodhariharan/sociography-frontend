@@ -8,7 +8,7 @@ const LoginPage = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post(`http://localhost:8080/api/auth/login`, null, {
+      const response = await axios.post(`https://sociography-bend-gxfqbzbxhnghg2hz.southeastasia-01.azurewebsites.net/api/auth/login`, null, {
         params: {
           username,
           password

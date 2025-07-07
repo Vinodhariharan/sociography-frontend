@@ -20,7 +20,7 @@ const SearchResultsPage = () => {
   useEffect(() => {
     const fetchResults = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/pictures/search', {
+        const response = await axios.get('https://sociography-bend-gxfqbzbxhnghg2hz.southeastasia-01.azurewebsites.net/pictures/search', {
           params: { keyword: query }
         });
         setResults(response.data);
