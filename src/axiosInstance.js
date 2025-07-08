@@ -2,7 +2,7 @@
 import axios from 'axios';
 import { getToken } from './services/AuthService';
 
-const baseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080';
+const baseUrl = "https://sociography-bend-gxfqbzbxhnghg2hz.southeastasia-01.azurewebsites.net";
 console.log('Base URL:', baseUrl);
 
 const instance = axios.create({

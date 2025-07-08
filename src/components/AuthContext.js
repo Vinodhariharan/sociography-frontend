@@ -1,7 +1,8 @@
 // src/components/AuthContext.js
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import {jwtDecode} from 'jwt-decode';
+import axiosInstance from '../axiosInstance';
 
 const AuthContext = createContext();
 
@@ -30,15 +31,17 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-      const response = await axios.post('https://sociography-bend-gxfqbzbxhnghg2hz.southeastasia-01.azurewebsites.net/api/auth/login', null, {
-        params: {
-          email,
-          password,
-        },
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-      });
+
+const response = await axiosInstance.post('/api/auth/login', null, {
+  params: {
+    email,
+    password,
+  },
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded',
+  },
+});
+
       const token = response.data;
 
       // Decode the JWT to extract user information
