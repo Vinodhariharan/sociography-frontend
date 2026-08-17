@@ -14,14 +14,13 @@ import {
   Link,
   Alert,
 } from '@mui/joy';
-import { 
-  Globe, 
-  MapPin, 
-  Heart, 
-  MessageCircle, 
-  Camera, 
-  Mail, 
-  Phone,
+import {
+  Globe,
+  MapPin,
+  Heart,
+  MessageCircle,
+  Camera,
+  Mail,
   CheckCircle,
   Clock
 } from 'lucide-react';

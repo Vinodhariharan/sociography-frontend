@@ -1,15 +1,13 @@
 // src/components/UserPage.js
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useAuth } from '../AuthContext';
 import PartnerProfile from './PartnerProfile';
 import ProfilePhotographer from './ProfilePhotographer';
-import { useNavigate } from 'react-router-dom';
 import NotFound from '../common/NotFound';
 
 const UserPage = () => {
   const { authState } = useAuth();
-  const navigate = useNavigate();
-  
+
   // useEffect(() => {
   //   if (authState.mode === 'guest') {
   //   }

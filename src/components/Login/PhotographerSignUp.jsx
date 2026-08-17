@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Grid, Slide } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios'; // Import axios
 import { jwtDecode } from 'jwt-decode';
 import FirstStep from './FirstStep'; // Adjust the path as necessary
 import SecondStep from './SecondStep'; // Adjust the path as necessary
@@ -16,7 +15,7 @@ const PhotographerSignUp = () => {
   const [profilePic, setProfilePic] = useState(null);
   const [selfInfo, setSelfInfo] = useState('');
   const [location, setLocation] = useState('');
-  const [contactNo, setContactNo] = useState('');
+  const [contactNo] = useState('');
   const [email, setEmail] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [step, setStep] = useState(1);

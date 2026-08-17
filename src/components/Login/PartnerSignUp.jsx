@@ -6,11 +6,11 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 import { jwtDecode } from 'jwt-decode';
 import axiosInstance from '../../axiosInstance';
-import { convertbackBase64, convertToBase64 } from '../../utils/convertToBase64';
+import { convertbackBase64 } from '../../utils/convertToBase64';
 import { useAuth } from '../AuthContext';
 
 const PartnerSignUp = () => {
-  const [name, setName] = useState(' hsdhiuj');
+  const [name] = useState(' hsdhiuj');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');

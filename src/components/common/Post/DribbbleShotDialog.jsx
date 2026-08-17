@@ -7,19 +7,16 @@ import CloseIcon from '@mui/icons-material/Close';
 import Divider from '@mui/material/Divider';
 import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
-import Chip from '@mui/material/Chip';
 import Box from '@mui/material/Box';
-import { Input, Card, CardContent } from '@mui/material';
+import { Input } from '@mui/material';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import Typography from '@mui/material/Typography';
 import LocationOnRoundedIcon from '@mui/icons-material/LocationOnRounded';
-import DeleteIcon from '@mui/icons-material/Delete';
 import { Sheet } from '@mui/joy';
 import { useAuth } from '../../AuthContext';
 import { Link } from 'react-router-dom';
 import { formatDate } from '../../../utils/formatDate';
-import { convertToBase64 } from '../../../utils/convertToBase64';
 import CommentsList from './CommentList';
 
 const DribbbleShotDialog = ({
@@ -41,7 +38,7 @@ const DribbbleShotDialog = ({
   const [newComment, setNewComment] = useState('');
   const [liked, setLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(likes);
-  const [likeId, setLikeId] = useState(null);
+  const [, setLikeId] = useState(null);
   const { authState } = useAuth();
 
   useEffect(() => {
@@ -50,6 +47,7 @@ const DribbbleShotDialog = ({
       fetchLikeCount();
       checkIfLiked();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
 
   const fetchComments = async () => {
@@ -160,7 +158,7 @@ const DribbbleShotDialog = ({
         setLikeCount(likeCount - 1);
         setLikeId(null);
       } else {
-        const response = await axios.post(`/api/pictures/${id}/likes`, likeRequest);
+        await axios.post(`/api/pictures/${id}/likes`, likeRequest);
         setLikeCount(likeCount + 1);
         setLikeId({ pictureId: id, photographerId: pid });
       }

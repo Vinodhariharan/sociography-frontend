@@ -141,13 +141,9 @@ import Avatar from '@mui/joy/Avatar';
 import Chip from '@mui/joy/Chip';
 import Card from '@mui/joy/Card';
 import CardContent from '@mui/joy/CardContent';
-import CardActions from '@mui/joy/CardActions';
-import Button from '@mui/joy/Button';
-import ButtonGroup from '@mui/joy/ButtonGroup';
 import Typography from '@mui/joy/Typography';
 import axios from '../../axiosInstance';
 import { useAuth } from '../AuthContext';
-import { convertToBase64 } from '../../utils/convertToBase64';
 
 const ProfileInfo = () => {
   const { authState } = useAuth();
