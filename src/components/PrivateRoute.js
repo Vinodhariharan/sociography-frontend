@@ -2,14 +2,18 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
 import { useAuth } from './AuthContext';
-import NotFound from './common/NotFound';
 
 const PrivateRoute = ({ children }) => {
-  const { authState } = useAuth();
-  console.log('PrivateRoute authState:', authState);
+  const { authState, initializing } = useAuth();
+
+  // Auth state hasn't been read from localStorage yet - avoid a false
+  // "logged out" flash for a user who actually is logged in.
+  if (initializing) {
+    return null;
+  }
 
   if (!authState.token) {
-    return <NotFound/>;
+    return <Navigate to="/login" replace />;
   }
 
   return children;

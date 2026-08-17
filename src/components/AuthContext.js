@@ -23,10 +23,14 @@ export const AuthProvider = ({ children }) => {
     mode: 'guest', // default mode
     photographerId: null, // Added photographerId to state
   });
+  // True until localStorage has been read once, so consumers (e.g.
+  // PrivateRoute) can tell "not yet checked" apart from "checked, logged out".
+  const [initializing, setInitializing] = useState(true);
 
   useEffect(() => {
     const storedAuthState = fetchAuthStateFromLocalStorage();
     setAuthState(storedAuthState);
+    setInitializing(false);
   }, []);
 
   const login = async (email, password) => {
@@ -74,7 +78,7 @@ const response = await axiosInstance.post('/api/auth/login', null, {
   };
 
   return (
-    <AuthContext.Provider value={{ authState, login, logout, signup }}>
+    <AuthContext.Provider value={{ authState, login, logout, signup, initializing }}>
       {children}
     </AuthContext.Provider>
   );
