@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
+import { jwtDecode } from 'jwt-decode';
 import axiosInstance from '../../axiosInstance';
 import { convertbackBase64, convertToBase64 } from '../../utils/convertToBase64';
 import { useAuth } from '../AuthContext';
@@ -54,13 +55,13 @@ const PartnerSignUp = () => {
           'Content-Type': 'application/json',
         }
       });
-        // Assuming the token is included in the response data
+        // The backend returns a plain success message with the token appended.
         const token = response.data.split('Token: ')[1];
-        console.log(response.data.split('Token: ')[1]);
+        const decoded = jwtDecode(token);
         localStorage.setItem('token', token);
         localStorage.setItem('email', email);
         localStorage.setItem('mode', 'partner');
-        localStorage.setItem('photographerId', response.data.photographerId);
+        localStorage.setItem('photographerId', decoded.id);
         signup(); // Adjust according to response structure
 
         // Redirect or handle successful signup
