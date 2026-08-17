@@ -5,7 +5,6 @@ import {
 import { Container, Sheet } from '@mui/joy';
 import ProfileAvatar from '../common/ProfileAvatar';
 import DribbbleShot from '../common/Post/DribbbleShot';
-import { convertToBase64 } from '../../utils/convertToBase64';
 import { useParams } from 'react-router-dom';
 import axiosInstance from '../../axiosInstance'; // Import the custom axios instance
 import { useAuth } from '../AuthContext';
@@ -16,7 +15,7 @@ const PhotographerPage = () => {
   const [profileData, setProfileData] = useState(null);
   const [images, setImages] = useState([]);
   // const [open, setOpen] = useState(false);
-  const [formData, setFormData] = useState({});
+  const [, setFormData] = useState({});
   const [contactRequestSent, setContactRequestSent] = useState(false);
   const [isFollowing, setIsFollowing] = useState(false);
 
@@ -57,7 +56,7 @@ const PhotographerPage = () => {
       })
       .catch(error => console.error('Error checking follow status:', error));
 
-  }, [photographerId]);
+  }, [photographerId, authState.photographerId]);
 
   const handleContactRequest = () => {
     setContactRequestSent(true);

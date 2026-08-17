@@ -10,18 +10,15 @@ import {
   Stack,
   Chip,
   IconButton,
-  Divider,
-  AspectRatio
+  Divider
 } from '@mui/joy';
 import {
   Business,
-  LocationOn,
   Cable,
   ArrowForward,
   Favorite,
   FavoriteBorder,
-  Share,
-  MoreVert
+  Share
 } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 

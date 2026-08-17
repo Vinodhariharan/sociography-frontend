@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Grid, Slide } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios'; // Import axios
+import { jwtDecode } from 'jwt-decode';
 import FirstStep from './FirstStep'; // Adjust the path as necessary
 import SecondStep from './SecondStep'; // Adjust the path as necessary
 import axiosInstance from '../../axiosInstance'; // Import the Axios instance
@@ -15,7 +15,7 @@ const PhotographerSignUp = () => {
   const [profilePic, setProfilePic] = useState(null);
   const [selfInfo, setSelfInfo] = useState('');
   const [location, setLocation] = useState('');
-  const [contactNo, setContactNo] = useState('');
+  const [contactNo] = useState('');
   const [email, setEmail] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [step, setStep] = useState(1);
@@ -53,14 +53,13 @@ const handleSignup = async () => {
         }
 
         const response = await axiosInstance.post('/api/signup/photographer', formData);
-        console.log(response.data);
-        // Assuming the token is included in the response data
+        // The backend returns a plain success message with the token appended.
         const token = response.data.split('Token: ')[1];
-        console.log(response.data.split('Token: ')[1]);
+        const decoded = jwtDecode(token);
         localStorage.setItem('token', token);
         localStorage.setItem('email', email);
         localStorage.setItem('mode', 'photographer');
-        localStorage.setItem('photographerId', response.data.photographerId);
+        localStorage.setItem('photographerId', decoded.id);
         await signup(); // Adjust according to response structure
 
         // Redirect or handle successful signup

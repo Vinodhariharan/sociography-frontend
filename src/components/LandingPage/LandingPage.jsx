@@ -4,17 +4,14 @@ import {
   Container,
   Grid,
   Paper,
-  Divider,
   LinearProgress,
   Typography,
   Fab,
   Zoom,
   useScrollTrigger,
   useTheme,
-  useMediaQuery,
   Fade,
   Slide,
-  Card,
   CardContent,
   Skeleton
 } from '@mui/material';
@@ -136,7 +133,6 @@ const SocialMediaFeed = () => {
   const [loading, setLoading] = useState(false);
   const { authState } = useAuth();
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   useEffect(() => {
     fetchPosts(page);
@@ -168,12 +164,7 @@ const SocialMediaFeed = () => {
     try {
       const response = await axiosInstance.get(`/pictures/page?page=${page}&size=7`);
       const data = response.data;
-      const convertedPosts = await Promise.all(data.content.map(async (post) => {
-        const base64Image = convertToBase64(post.picture);
-        return {
-          ...post,
-        };
-      }));
+      const convertedPosts = data.content.map((post) => ({ ...post }));
 
       setPosts((prevPosts) => [...prevPosts, ...convertedPosts]);
       setLoading(false);
@@ -233,6 +224,7 @@ const SocialMediaFeed = () => {
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading]);
 
   return (

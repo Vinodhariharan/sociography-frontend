@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-  Button, Dialog, DialogTitle, DialogContent, DialogActions, TextField, Grid, MenuItem, Select, InputLabel, FormControl, LinearProgress, Snackbar, Alert
+  Button, Dialog, DialogTitle, DialogContent, DialogActions, TextField, LinearProgress, Snackbar, Alert
 } from '@mui/material';
 import {
   Box,
@@ -12,20 +12,12 @@ import {
   Chip,
   AspectRatio,
   IconButton,
-  Sheet,
-  Textarea,
-  Option,
-  Select as JoySelect,
-  FormControl as JoyFormControl,
-  FormLabel,
-  Input,
-  LinearProgress as JoyLinearProgress
+  FormLabel
 } from '@mui/joy';
-import { 
-  Upload, 
-  Image as ImageIcon, 
-  LocationOn, 
-  Description, 
+import {
+  Upload,
+  LocationOn,
+  Description,
   Category,
   CloudUpload,
   Close,
@@ -132,10 +124,6 @@ const UploadDialog = ({ onUploadStart, onUploadEnd }) => {
 
   const handleSnackbarClose = () => {
     setSnackbarOpen(false);
-  };
-
-  const handleCategoryChange = (event, newValue) => {
-    setCategory(newValue || []);
   };
 
   const removeCategory = (categoryToRemove) => {

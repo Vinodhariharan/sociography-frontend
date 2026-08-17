@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardContent, Typography, Grid, Button, Box, Container } from '@mui/joy';
+import { Card, CardContent, Typography, Grid, Box, Container } from '@mui/joy';
 import AspectRatio from '@mui/joy/AspectRatio';
 import { styled } from '@mui/system';
 import { useNavigate } from 'react-router-dom';

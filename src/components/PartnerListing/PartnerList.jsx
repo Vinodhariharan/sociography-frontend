@@ -1,24 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import PartnerCard from './PartnerCard';
-import { 
-  Box, 
-  Typography, 
-  Grid, 
-  Card, 
-  CardContent, 
+import {
+  Box,
+  Typography,
+  Grid,
+  Card,
+  CardContent,
   Skeleton,
   Stack,
   Divider,
   IconButton,
   Chip,
-  Input,
-  Sheet
+  Input
 } from '@mui/joy';
-import { 
-  Search, 
-  FilterList, 
-  Business, 
-  LocationOn,
+import {
+  Search,
+  Business,
   Refresh
 } from '@mui/icons-material';
 import axiosInstance from '../../axiosInstance';

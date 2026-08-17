@@ -6,7 +6,6 @@ import Button from '@mui/joy/Button';
 import Box from '@mui/joy/Box';
 import Avatar from '@mui/joy/Avatar';
 import { Link, useNavigate } from 'react-router-dom';
-import { getToken, logout } from '../../services/AuthService';
 import { Input } from '@mui/joy';
 import SearchIcon from '@mui/icons-material/Search';
 import { useAuth } from '../AuthContext';
@@ -14,16 +13,14 @@ import axios from '../../axiosInstance';
 import { convertToBase64 } from '../../utils/convertToBase64';
 
 const Navbar = () => {
-  const [authenticated, setAuthenticated] = useState(false);
   const [profilePic, setProfilePic] = useState('');
   const navigate = useNavigate();
-  const { authState } = useAuth();
+  const { authState, logout } = useAuth();
   const { mode, photographerId } = authState;
+  const authenticated = !!authState.token;
   const [query, setQuery] = useState('');
 
   useEffect(() => {
-    setAuthenticated(!!getToken());
-
     // Fetch profile picture based on mode
     if (mode && (mode === 'partner' || mode === 'photographer')) {
       axios.get(`/${mode === 'partner' ? 'partners' : 'photographers'}/${photographerId}`)
@@ -50,7 +47,6 @@ const Navbar = () => {
 
   const handleLogout = () => {
     logout();
-    setAuthenticated(false);
     navigate('/login');
   };
 

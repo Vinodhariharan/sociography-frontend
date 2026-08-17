@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Button, Typography, Box, IconButton, Paper } from '@mui/material';
+import { Grid, Button, Typography, Box, Paper } from '@mui/material';
 import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 import { styled } from '@mui/joy/styles';
 import Input from '@mui/joy/Input';
@@ -55,15 +55,6 @@ const StyledPaper = styled(Paper)({
 //       borderBottomLeftRadius: 'calc(var(--Input-radius) - var(--variant-borderWidth, 0px))',
 //     },
 //   });
-  
-  const StyledLabel = styled('label')(({ theme }) => ({
-    position: 'absolute',
-    lineHeight: 1,
-    top: 'calc((var(--Input-minHeight) - 1em) / 2)',
-    color: theme.vars.palette.text.tertiary,
-    fontWeight: theme.vars.fontWeight.md,
-    transition: 'all 150ms cubic-bezier(0.4, 0, 0.2, 1)',
-  }));
   
 //   const InnerInput = React.forwardRef(function InnerInput(props, ref) {
 //     const id = React.useId();

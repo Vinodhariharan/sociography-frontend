@@ -2,21 +2,17 @@ import React, { useState, useEffect } from 'react';
 import {
   Grid, Button, Dialog, DialogTitle, DialogContent, DialogActions, TextField
 } from '@mui/material';
-import { 
-  Sheet, 
-  Box, 
-  Card, 
-  CardContent, 
-  Typography, 
+import {
+  Box,
+  Card,
+  Typography,
   Divider,
   Avatar,
   IconButton,
   Stack,
-  Chip,
-  AspectRatio
+  Chip
 } from '@mui/joy';
-import { Edit, Camera, Upload } from '@mui/icons-material';
-import ProfileAvatar from '../common/ProfileAvatar';
+import { Edit, Camera } from '@mui/icons-material';
 import DribbbleShot from '../common/Post/DribbbleShot';
 import UploadDialog from './UploadDialog';
 import { convertToBase64 } from '../../utils/convertToBase64';
@@ -29,8 +25,6 @@ const About = () => {
   const [images, setImages] = useState([]);
   const [open, setOpen] = useState(false);
   const [formData, setFormData] = useState({});
-  const [contactRequestSent, setContactRequestSent] = useState(false);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
     if (!authState) return;
@@ -86,16 +80,6 @@ const About = () => {
     setOpen(false);
   };
 
-  const handleContactRequest = () => {
-    setContactRequestSent(true);
-    console.log('Contact request sent');
-  };
-
-  const handleSave = () => {
-    console.log(formData);
-    handleClose();
-  };
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -129,11 +113,7 @@ const About = () => {
       if (!response.ok) {
         throw new Error(`Error updating profile: ${response.status}`);
       }
-
-      const data = await response.json();
-      // Handle the response data
     } catch (error) {
-      setError(error.message);
       console.error('Error updating profile:', error);
     }
   };

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import DribbbleShot from '../common/Post/DribbbleShot';
 import axiosInstance from '../../axiosInstance';
-import { CircularProgress, LinearProgress } from '@mui/joy';
+import { LinearProgress } from '@mui/joy';
 import { useAuth } from '../AuthContext';
 
 const SearchResultsPage = () => {
@@ -14,8 +14,6 @@ const SearchResultsPage = () => {
   const [error, setError] = useState(null);
   const {authState} = useAuth();
 
-
-  const convertToBase64 = (data) => `data:image/png;base64,${data}`;
 
   useEffect(() => {
     const fetchResults = async () => {
