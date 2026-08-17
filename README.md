@@ -52,7 +52,7 @@ This app talks to [sociography-backend](https://github.com/vinodhariharan/sociog
    ```
    npm install
    ```
-3. Point the app at your backend: `src/axiosInstance.js` sets the API `baseURL`. Update it if you're running the backend somewhere other than the URL currently configured there (e.g. `http://localhost:8080` for local dev).
+3. Point the app at your backend: copy `.env.example` to `.env.local` and set `REACT_APP_API_URL` to your backend's URL (defaults to `http://localhost:8080` if unset). For a deployed frontend (e.g. Vercel), set `REACT_APP_API_URL` in the host's environment variables instead - CRA bakes it in at build time, so changing it requires a rebuild.
 4. Start the app:
    ```
    npm start
